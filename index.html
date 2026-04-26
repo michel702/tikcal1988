@@ -214,20 +214,27 @@
 let scans = Number(localStorage.getItem("tikcal_scans") || 0);
 let unlocked = localStorage.getItem("tikcal_unlocked") === "true";
 
+/* 🔥 AJUSTE FEITO AQUI */
 if (window.location.search.includes("success=1")) {
   unlocked = true;
   localStorage.setItem("tikcal_unlocked", "true");
 
-  if (typeof gtag === "function") {
-    gtag("event", "conversion", {
-      "send_to": "AW-11436691837/sXOrCkjjKMcEP2iuM0q",
-      "value": 5.0,
-      "currency": "USD"
-    });
-  }
-
-  alert("Payment successful! Unlimited scans unlocked.");
-  window.history.replaceState({}, document.title, window.location.pathname);
+  setTimeout(function () {
+    if (typeof gtag === "function") {
+      gtag("event", "conversion", {
+        "send_to": "AW-11436691837/sXOrCkjjKMcEP2iuM0q",
+        "value": 5.0,
+        "currency": "USD",
+        "event_callback": function () {
+          alert("Payment successful! Unlimited scans unlocked.");
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+      });
+    } else {
+      alert("Payment successful! Unlimited scans unlocked.");
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, 800);
 }
 
 async function analyze() {
