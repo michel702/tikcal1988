@@ -10,20 +10,27 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+
     gtag('js', new Date());
     gtag('config', 'AW-11436691837');
 
+    // Dispara conversão com callback seguro
     gtag('event', 'conversion', {
       'send_to': 'AW-11436691837/sXOrCkjjKMcEP2iuM0q',
       'value': 5.0,
-      'currency': 'USD'
+      'currency': 'USD',
+      'event_callback': function () {
+        window.location.href = "/";
+      }
     });
 
-    localStorage.setItem("tikcal_unlocked", "true");
-
+    // fallback (caso callback falhe)
     setTimeout(function () {
       window.location.href = "/";
-    }, 2000);
+    }, 4000);
+
+    // libera acesso
+    localStorage.setItem("tikcal_unlocked", "true");
   </script>
 
   <style>
