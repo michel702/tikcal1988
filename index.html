@@ -2,90 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>TikCal</title>
+  <title>TikCal - Food Photo Calorie Scanner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(34,197,94,0.18), transparent 35%),
+        radial-gradient(circle at top left, rgba(34,197,94,0.20), transparent 32%),
         linear-gradient(135deg, #020617, #0f172a 55%, #03140b);
       color: white;
       text-align: center;
-      padding: 24px;
+      padding: 14px;
     }
 
     .box {
-      max-width: 430px;
+      max-width: 420px;
       margin: 0 auto;
-      padding: 28px 22px;
     }
 
     .logo {
-      font-size: 42px;
-      font-weight: 800;
-      margin-bottom: 10px;
+      font-size: 34px;
+      font-weight: 900;
+      margin-top: 6px;
     }
 
-    .logo span {
-      color: #7CFF5B;
+    .logo span { color: #7CFF5B; }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(124,255,91,0.12);
+      border: 1px solid rgba(124,255,91,0.30);
+      color: #b7ff9f;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     h1 {
-      font-size: 38px;
+      font-size: 30px;
       line-height: 1.05;
-      margin: 18px 0 12px;
+      margin: 12px 0 8px;
       font-weight: 900;
+      letter-spacing: -0.8px;
     }
 
-    .green {
-      color: #7CFF5B;
-    }
+    .green { color: #7CFF5B; }
 
     p {
       color: #cbd5e1;
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.35;
+      margin: 7px 0;
     }
 
     .card {
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(124, 255, 91, 0.22);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      background: rgba(15, 23, 42, 0.90);
+      border: 1px solid rgba(124, 255, 91, 0.24);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.36);
       border-radius: 22px;
-      padding: 22px;
-      margin-top: 24px;
+      padding: 16px;
+      margin-top: 14px;
     }
 
     input[type="file"] {
       width: 100%;
-      padding: 14px;
-      border: 1px dashed rgba(124, 255, 91, 0.45);
+      padding: 12px;
+      border: 1px dashed rgba(124, 255, 91, 0.50);
       border-radius: 14px;
-      background: rgba(2, 6, 23, 0.75);
+      background: rgba(2, 6, 23, 0.78);
       color: #cbd5e1;
-      margin-top: 12px;
+      font-size: 13px;
     }
 
     button {
       width: 100%;
-      padding: 15px 20px;
+      padding: 15px 18px;
       background: linear-gradient(135deg, #7CFF5B, #22c55e);
       border: none;
       color: #02130a;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 14px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(34,197,94,0.28);
+      margin-top: 12px;
+      border-radius: 15px;
+      box-shadow: 0 10px 28px rgba(34,197,94,0.32);
     }
 
     button:hover {
@@ -93,56 +100,62 @@
       filter: brightness(1.05);
     }
 
+    .trust {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #a7f3d0;
+      font-weight: 700;
+    }
+
     img {
       max-width: 100%;
-      margin-top: 18px;
-      border-radius: 18px;
+      max-height: 230px;
+      object-fit: cover;
+      margin-top: 14px;
+      border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.12);
     }
 
     .result {
-      margin-top: 18px;
-      background: rgba(2, 6, 23, 0.86);
+      margin-top: 14px;
+      background: rgba(2, 6, 23, 0.90);
       border: 1px solid rgba(124, 255, 91, 0.25);
-      padding: 18px;
-      border-radius: 18px;
+      padding: 15px;
+      border-radius: 16px;
       text-align: left;
       white-space: pre-line;
       color: #e2e8f0;
-      line-height: 1.5;
+      line-height: 1.45;
+      font-size: 14px;
     }
 
     .paywall {
-      margin-top: 20px;
-      background: rgba(34, 197, 94, 0.10);
-      border: 1px solid rgba(124, 255, 91, 0.35);
-      padding: 18px;
+      margin-top: 14px;
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(124, 255, 91, 0.42);
+      padding: 16px;
       border-radius: 18px;
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .feature {
-      background: rgba(255,255,255,0.05);
-      border-radius: 14px;
-      padding: 12px 8px;
-      font-size: 13px;
-      color: #cbd5e1;
-    }
-
-    .hidden {
-      display: none;
+    .paywall h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
     }
 
     .small {
-      font-size: 12px;
+      font-size: 11px;
       color: #94a3b8;
-      margin-top: 16px;
+      margin-top: 10px;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-height: 720px) {
+      .logo { font-size: 30px; }
+      h1 { font-size: 26px; }
+      .badge { display: none; }
+      .card { margin-top: 10px; padding: 14px; }
+      p { font-size: 13px; }
     }
   </style>
 </head>
@@ -152,32 +165,35 @@
 <div class="box">
   <div class="logo">📸 Tik<span>Cal</span></div>
 
+  <div class="badge">🔥 12,000+ meals analyzed today</div>
+
   <h1>
-    Snap. Analyze.<br>
-    <span class="green">Know Your Calories.</span>
+    Scan Calories From<br>
+    <span class="green">Any Food Photo</span>
   </h1>
 
-  <p>No typing. No guessing. Upload a meal photo and get instant calorie & macro estimates.</p>
-
-  <div class="features">
-    <div class="feature">📷 Snap</div>
-    <div class="feature">🧠 AI Analyze</div>
-    <div class="feature">📊 Results</div>
-  </div>
+  <p>No typing. No guessing. Upload your meal and get instant calories.</p>
 
   <div class="card">
     <input type="file" id="imageInput" accept="image/*" />
-    <button onclick="analyze()">Analyze Meal</button>
+
+    <button onclick="analyze()">Scan My Meal Now</button>
+
+    <p class="trust">⚠️ Free scans limited — try now</p>
 
     <img id="preview" class="hidden" />
 
     <div id="result" class="result hidden"></div>
 
     <div id="paywall" class="paywall hidden">
-      <p>⚠️ Free limit reached</p>
+      <h2>Unlock Full Nutrition Analysis</h2>
+      <p>Get calories, protein, carbs & fat instantly.</p>
+
       <button onclick="window.location.href='https://buy.stripe.com/aFa7sL9YgcAi7o55CC4F201'">
-        Unlock Unlimited — $5
+        Unlock Now — $5
       </button>
+
+      <p class="small">One-time payment. No subscription.</p>
     </div>
 
     <p class="small">Estimates may vary. TikCal is not medical advice.</p>
@@ -203,14 +219,6 @@ async function analyze() {
     return;
   }
 
-  if (!unlocked && scans >= 3) {
-    document.getElementById("paywall").classList.remove("hidden");
-    return;
-  }
-
-  scans++;
-  localStorage.setItem("tikcal_scans", scans);
-
   const reader = new FileReader();
 
   reader.onload = async function(e) {
@@ -227,17 +235,23 @@ async function analyze() {
     try {
       const response = await fetch("/api/analyze", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          image: base64Image
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64Image })
       });
 
       const data = await response.json();
+      const fullResult = data.result || "Could not analyze image.";
 
-      resultBox.innerText = data.result || "Error analyzing image";
+      scans++;
+      localStorage.setItem("tikcal_scans", scans);
+
+      if (!unlocked && scans >= 3) {
+        resultBox.innerText = extractCaloriesOnly(fullResult);
+        document.getElementById("paywall").classList.remove("hidden");
+        return;
+      }
+
+      resultBox.innerText = fullResult;
 
     } catch (error) {
       resultBox.innerText = "Error connecting to server";
@@ -245,6 +259,23 @@ async function analyze() {
   };
 
   reader.readAsDataURL(file);
+}
+
+function extractCaloriesOnly(text) {
+  const calorieLine = text
+    .split("\n")
+    .find(line =>
+      line.toLowerCase().includes("calorie") ||
+      line.toLowerCase().includes("kcal")
+    );
+
+  return `
+Estimated Calories: ${calorieLine ? calorieLine.replace(/[-•]/g, "").trim() : "Available"}
+
+Protein: 🔒 Unlock
+Carbs: 🔒 Unlock
+Fat: 🔒 Unlock
+`;
 }
 </script>
 
