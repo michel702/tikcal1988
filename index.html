@@ -245,16 +245,26 @@ async function analyze() {
       const data = await response.json();
       const fullResult = data.result || "Could not analyze image.";
 
-      scans++;
-      localStorage.setItem("tikcal_scans", scans);
+      if (unlocked || scans === 0) {
+        scans++;
+        localStorage.setItem("tikcal_scans", scans);
+        resultBox.innerText = fullResult;
+        return;
+      }
 
-      if (!unlocked && scans >= 3) {
+      if (!unlocked && scans === 1) {
+        scans++;
+        localStorage.setItem("tikcal_scans", scans);
         resultBox.innerText = extractCaloriesOnly(fullResult);
         document.getElementById("paywall").classList.remove("hidden");
         return;
       }
 
-      resultBox.innerText = fullResult;
+      if (!unlocked && scans >= 2) {
+        resultBox.innerText = "🔒 Unlock full nutrition analysis to continue scanning.";
+        document.getElementById("paywall").classList.remove("hidden");
+        return;
+      }
 
     } catch (error) {
       resultBox.innerText = "Error connecting to server";
