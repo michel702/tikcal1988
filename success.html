@@ -20,6 +20,10 @@
     });
 
     localStorage.setItem("tikcal_unlocked", "true");
+
+    setTimeout(function () {
+      window.location.href = "/";
+    }, 2000);
   </script>
 
   <style>
@@ -44,13 +48,8 @@
       padding: 28px;
     }
 
-    h1 {
-      color: #7CFF5B;
-    }
-
-    p {
-      color: #cbd5e1;
-    }
+    h1 { color: #7CFF5B; }
+    p { color: #cbd5e1; }
 
     a {
       display: block;
@@ -68,7 +67,7 @@
 <body>
   <div class="box">
     <h1>✅ Payment Successful</h1>
-    <p>Unlimited scans unlocked.</p>
+    <p>Unlimited scans unlocked. Redirecting...</p>
     <a href="/">Start Scanning</a>
   </div>
 </body>

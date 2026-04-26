@@ -5,6 +5,16 @@
   <title>TikCal - Food Photo Calorie Scanner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11436691837"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-11436691837');
+  </script>
+
   <style>
     * { box-sizing: border-box; }
 
@@ -149,14 +159,6 @@
     }
 
     .hidden { display: none; }
-
-    @media (max-height: 720px) {
-      .logo { font-size: 30px; }
-      h1 { font-size: 26px; }
-      .badge { display: none; }
-      .card { margin-top: 10px; padding: 14px; }
-      p { font-size: 13px; }
-    }
   </style>
 </head>
 
@@ -179,7 +181,8 @@
 
     <button onclick="analyze()">Scan My Meal Now</button>
 
-    <p class="trust">⚠️ Free scans limited — try now</p>
+    <!-- 🔥 ALTERADO -->
+    <p id="accessStatus" class="trust">⚠️ Free scans limited — try now</p>
 
     <img id="preview" class="hidden" />
 
@@ -189,7 +192,8 @@
       <h2>Unlock Full Nutrition Analysis</h2>
       <p>Get calories, protein, carbs & fat instantly.</p>
 
-      <button onclick="window.location.href='https://buy.stripe.com/aFa7sL9YgcAi7o55CC4F201'">
+      <!-- 🔥 ALTERADO (link teste) -->
+      <button onclick="window.location.href='https://buy.stripe.com/test_bJe28r4DWdEm23L7KK4F200'">
         Unlock Now — $5
       </button>
 
@@ -203,6 +207,12 @@
 <script>
 let scans = Number(localStorage.getItem("tikcal_scans") || 0);
 let unlocked = localStorage.getItem("tikcal_unlocked") === "true";
+
+/* 🔥 NOVO: muda texto após pagamento */
+const accessStatus = document.getElementById("accessStatus");
+if (unlocked && accessStatus) {
+  accessStatus.innerText = "✅ Unlimited scans unlocked";
+}
 
 async function analyze() {
   const file = document.getElementById("imageInput").files[0];
